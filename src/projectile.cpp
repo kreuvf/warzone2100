@@ -538,7 +538,8 @@ bool proj_SendProjectileAngled(WEAPON *psWeap, SIMPLE_OBJECT *psAttacker, int pl
 				/* firing sound emitted from source */
 				audio_PlayObjDynamicTrack(psProj->psSource, psStats->iAudioFireID, NULL);
 				/* GJ HACK: move howitzer sound with shell */
-				if ( psStats->weaponSubClass == WSC_HOWITZERS )
+				/* Kreuvf: Added HOTHOWITZER */
+				if ( (psStats->weaponSubClass == WSC_HOWITZERS) || (psStats->weaponSubClass == WSC_HOTHOWITZER) )
 				{
 					audio_PlayObjDynamicTrack(psProj, ID_SOUND_HOWITZ_FLIGHT, NULL);
 				}
@@ -697,14 +698,29 @@ static void proj_InFlightFunc(PROJECTILE *psProj)
 			break;
 		case WSC_CANNON:
 		case WSC_BOMB:
+		case WSC_CLUSTERBOMB:
+		case WSC_HOTBOMB:
+		case WSC_HEAVYBOMB:
 		case WSC_ELECTRONIC:
 		case WSC_EMP:
 		case WSC_FLAME:
+		case WSC_LASER:
+		case WSC_AALASER:
 		case WSC_ENERGY:
 		case WSC_GAUSS:
 			distanceExtensionFactor = 150;
 			break;
 		case WSC_AAGUN: // No extended distance
+		case WSC_AACANNON:
+		case WSC_GEN0:
+		case WSC_GEN1:
+		case WSC_GEN2:
+		case WSC_GEN3:
+		case WSC_GEN4:
+		case WSC_GEN5:
+		case WSC_GEN6:
+		case WSC_GEN7:
+		case WSC_GEN8:
 			distanceExtensionFactor = 100;
 			break;
 		case WSC_ROCKET:
@@ -715,6 +731,7 @@ static void proj_InFlightFunc(PROJECTILE *psProj)
 		case WSC_COUNTER:
 		case WSC_MORTARS:
 		case WSC_HOWITZERS:
+		case WSC_HOTHOWITZER:
 		case WSC_LAS_SAT:
 			distanceExtensionFactor = 150;
 			break;

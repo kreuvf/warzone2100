@@ -267,7 +267,7 @@ void intUpdateProgressBar(WIDGET *psWidget, W_CONTEXT *psContext)
 				{
 					// Started production. Set the colour of the bar to yellow.
 					int buildPointsTotal = FactoryGetTemplate(Manufacture)->buildPoints;
-					int buildRate = Manufacture->timeStartHold == 0? Manufacture->productionOutput : 0;
+					uint32_t buildRate = Manufacture->timeStartHold == 0? Manufacture->productionOutput : 0;
 					formatTime(BarGraph, buildPointsTotal - Manufacture->buildPointsRemaining, buildPointsTotal, buildRate, _("Construction Progress"));
 				}
 				else

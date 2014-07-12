@@ -1708,12 +1708,11 @@ STRUCTURE* buildStructureDir(STRUCTURE_STATS *pStructureType, UDWORD x, UDWORD y
 
 				//quick check not trying to add too much
 				ASSERT_OR_RETURN(NULL, psBuilding->pFunctionality->factory.productionOutput +
-					((PRODUCTION_FUNCTION*)pStructureType->asFuncList[0])->productionOutput < UBYTE_MAX,
+					((PRODUCTION_FUNCTION*)pStructureType->asFuncList[0])->productionOutput <= UINT32_MAX,
 					"building factory module - production Output is too big");
 
 				psBuilding->pFunctionality->factory.productionOutput += ((
 					PRODUCTION_FUNCTION*)pStructureType->asFuncList[0])->productionOutput;
-
 				capacity = psBuilding->pFunctionality->factory.capacity;
 			}
 		}
@@ -1936,7 +1935,7 @@ static bool setFunctionality(STRUCTURE	*psBuilding, STRUCTURE_TYPE functionType)
 			unsigned int x, y;
 
 			psFactory->capacity = (UBYTE) ((PRODUCTION_FUNCTION*)psBuilding->pStructureType->asFuncList[0])->capacity;
-			psFactory->productionOutput = (UBYTE) ((PRODUCTION_FUNCTION*)psBuilding->pStructureType->asFuncList[0])->productionOutput;
+			psFactory->productionOutput = ((PRODUCTION_FUNCTION*)psBuilding->pStructureType->asFuncList[0])->productionOutput;
 			psFactory->psSubject = NULL;
 
 			// Default the secondary order - AB 22/04/99
@@ -3790,11 +3789,12 @@ void structureUpdate(STRUCTURE *psBuilding, bool mission)
 	}
 	else
 	{
-		//if selfrepair has been researched then check the health level of the
+		//if selfrepair has been researched and the structure is not currently built
+		//on then check the health level of the
 		//structure once resistance is fully up
 		iPointsRequired = structureBody(psBuilding);
 		if (selfRepairEnabled(psBuilding->player) && (psBuilding->body < (SWORD)
-			iPointsRequired))
+			iPointsRequired) && (psBuilding->status != SS_BEING_BUILT))
 		{
 			//start the self repair off
 			if (psBuilding->lastResistance == ACTION_START_TIME)
@@ -5610,8 +5610,8 @@ void printStructureInfo(STRUCTURE *psStructure)
 		{
 			unsigned int assigned_droids = countAssignedDroids(psStructure);
 
-			CONPRINTF(ConsoleString, (ConsoleString, ngettext("%s - %u Unit assigned - Damage %3.0f%%", "%s - %u Units assigned - Damage %3.0f%%", assigned_droids),
-					  getStatName(psStructure->pStructureType), assigned_droids, getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, ngettext("%s - %u Unit assigned - Body Points: %d of %d", "%s - %u Units assigned - Body Points: %d of %d", assigned_droids),
+					  getStatName(psStructure->pStructureType), assigned_droids, psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	case REF_DEFENSE:
@@ -5635,13 +5635,13 @@ void printStructureInfo(STRUCTURE *psStructure)
 		{
 			unsigned int assigned_droids = countAssignedDroids(psStructure);
 
-			CONPRINTF(ConsoleString, (ConsoleString, ngettext("%s - %u Unit assigned - Damage %3.0f%%", "%s - %u Units assigned - Damage %3.0f%%", assigned_droids),
-				getStatName(psStructure->pStructureType), assigned_droids, getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, ngettext("%s - %u Unit assigned - Body Points: %d of %d", "%s - %u Units assigned - Body Points: %d of %d", assigned_droids),
+				getStatName(psStructure->pStructureType), assigned_droids, psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		else
 		{
-			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Damage %3.0f%%"),
-									  getStatName(psStructure->pStructureType), getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Body Points: %d of %d"),
+									  getStatName(psStructure->pStructureType), psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	case REF_REPAIR_FACILITY:
@@ -5654,7 +5654,7 @@ void printStructureInfo(STRUCTURE *psStructure)
 		else
 #endif
 		{
-			CONPRINTF(ConsoleString, (ConsoleString, "%s - Damage %3.0f%%", getStatName(psStructure->pStructureType), getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, "%s - Body Points: %d of %d", getStatName(psStructure->pStructureType), psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	case REF_RESOURCE_EXTRACTOR:
@@ -5667,7 +5667,7 @@ void printStructureInfo(STRUCTURE *psStructure)
 		else
 #endif
 		{
-			CONPRINTF(ConsoleString, (ConsoleString, "%s - Damage %3.0f%%", getStatName(psStructure->pStructureType), getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, "%s - Body Points: %d of %d", getStatName(psStructure->pStructureType), psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	case REF_POWER_GEN:
@@ -5690,8 +5690,8 @@ void printStructureInfo(STRUCTURE *psStructure)
 		else
 #endif
 		{
-			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Connected %u of %u - Damage %3.0f%%"),
-					  getStatName(psStructure->pStructureType), numConnected, NUM_POWER_MODULES, getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Connected %u of %u - Body Points: %d of %d"),
+					  getStatName(psStructure->pStructureType), numConnected, NUM_POWER_MODULES, psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	case REF_CYBORG_FACTORY:
@@ -5708,8 +5708,8 @@ void printStructureInfo(STRUCTURE *psStructure)
 		else
 #endif
 		{
-			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Damage %3.0f%%"),
-					  getStatName(psStructure->pStructureType), getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Body Points: %d of %d"),
+					  getStatName(psStructure->pStructureType), psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	case REF_RESEARCH:
@@ -5723,8 +5723,8 @@ void printStructureInfo(STRUCTURE *psStructure)
 		else
 #endif
 		{
-			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Damage %3.0f%%"),
-					  getStatName(psStructure->pStructureType), getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Body Points: %d of %d"),
+					  getStatName(psStructure->pStructureType), psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	default:
@@ -5737,8 +5737,8 @@ void printStructureInfo(STRUCTURE *psStructure)
 		else
 #endif
 		{
-			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Damage %3.0f%%"),
-					  getStatName(psStructure->pStructureType), getStructureDamage(psStructure) * (100.f/65536.f)));
+			CONPRINTF(ConsoleString, (ConsoleString, _("%s - Body Points: %d of %d"),
+					  getStatName(psStructure->pStructureType), psStructure->body, structureBodyBuilt(psStructure)));
 		}
 		break;
 	}

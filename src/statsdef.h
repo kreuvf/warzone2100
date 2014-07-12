@@ -278,6 +278,24 @@ enum WEAPON_SUBCLASS
 	WSC_BOMB,
 	WSC_COMMAND,
 	WSC_EMP,
+	/* New weapon subclasses for FK mod and some generic subclasses for other projects */
+	/* Added by Kreuvf 2012-06-03 */
+	WSC_AACANNON,
+	WSC_CLUSTERBOMB,
+	WSC_HEAVYBOMB,
+	WSC_HOTBOMB,
+	WSC_HOTHOWITZER,
+	WSC_LASER,
+	WSC_AALASER,
+	WSC_GEN0,
+	WSC_GEN1,
+	WSC_GEN2,
+	WSC_GEN3,
+	WSC_GEN4,
+	WSC_GEN5,
+	WSC_GEN6,
+	WSC_GEN7,
+	WSC_GEN8,
 	WSC_COUNTER,				// Counter missile
 	WSC_NUM_WEAPON_SUBCLASSES,	/** The number of enumerators in this enum.	 */
 };

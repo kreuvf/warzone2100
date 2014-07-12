@@ -152,6 +152,56 @@ static void printWeaponInfo(const WEAPON_STATS* psStats)
 	case WSC_EMP:
 		pWSC = "WSC_EMP";
 		break;
+	/* New weapon subclasses for FK mod and some generic subclasses for other projects */
+	/* Added by Kreuvf 2012-06-03 */
+	case WSC_AACANNON:
+		pWSC = "WSC_AACANNON";
+		break;
+	case WSC_CLUSTERBOMB:
+		pWSC = "WSC_CLUSTERBOMB";
+		break;
+	case WSC_HEAVYBOMB:
+		pWSC = "WSC_HEAVYBOMB";
+		break;
+	case WSC_HOTBOMB:
+		pWSC = "WSC_HOTBOMB";
+		break;
+	case WSC_HOTHOWITZER:
+		pWSC = "WSC_HOTHOWITZER";
+		break;
+	case WSC_LASER:
+		pWSC = "WSC_LASER";
+		break;
+	case WSC_AALASER:
+		pWSC = "WSC_AALASER";
+		break;
+	case WSC_GEN0:
+		pWSC = "WSC_GEN0";
+		break;
+	case WSC_GEN1:
+		pWSC = "WSC_GEN1";
+		break;
+	case WSC_GEN2:
+		pWSC = "WSC_GEN2";
+		break;
+	case WSC_GEN3:
+		pWSC = "WSC_GEN3";
+		break;
+	case WSC_GEN4:
+		pWSC = "WSC_GEN4";
+		break;
+	case WSC_GEN5:
+		pWSC = "WSC_GEN5";
+		break;
+	case WSC_GEN6:
+		pWSC = "WSC_GEN6";
+		break;
+	case WSC_GEN7:
+		pWSC = "WSC_GEN7";
+		break;
+	case WSC_GEN8:
+		pWSC = "WSC_GEN8";
+		break;
 	default:
 		pWSC = "UNKNOWN SUB CLASS";
 		break;

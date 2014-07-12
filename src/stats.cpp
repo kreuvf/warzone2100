@@ -2876,6 +2876,72 @@ bool getWeaponSubClass(const char* subClass, WEAPON_SUBCLASS* wclass)
 	{
 		*wclass = WSC_EMP;
 	}
+	/* New weapon subclasses for FK mod and some generic subclasses for other projects */
+	/* Added by Kreuvf 2012-06-03 */
+	else if (strcmp(subClass, "A-A CANNON") == 0)
+	{
+		*wclass = WSC_AACANNON;
+	}
+	else if (strcmp(subClass, "CLUSTER BOMB") == 0)
+	{
+		*wclass = WSC_CLUSTERBOMB;
+	}
+	else if (strcmp(subClass, "HEAVY BOMB") == 0)
+	{
+		*wclass = WSC_HEAVYBOMB;
+	}
+	else if (strcmp(subClass, "HOT BOMB") == 0)
+	{
+		*wclass = WSC_HOTBOMB;
+	}
+	else if (strcmp(subClass, "HOT HOWITZER") == 0)
+	{
+		*wclass = WSC_HOTHOWITZER;
+	}
+	else if (strcmp(subClass, "LASER") == 0)
+	{
+		*wclass = WSC_LASER;
+	}
+	else if (strcmp(subClass, "A-A LASER") == 0)
+	{
+		*wclass = WSC_AALASER;
+	}
+	else if (strcmp(subClass, "GENERIC 0") == 0)
+	{
+		*wclass = WSC_GEN0;
+	}
+	else if (strcmp(subClass, "GENERIC 1") == 0)
+	{
+		*wclass = WSC_GEN1;
+	}
+	else if (strcmp(subClass, "GENERIC 2") == 0)
+	{
+		*wclass = WSC_GEN2;
+	}
+	else if (strcmp(subClass, "GENERIC 3") == 0)
+	{
+		*wclass = WSC_GEN3;
+	}
+	else if (strcmp(subClass, "GENERIC 4") == 0)
+	{
+		*wclass = WSC_GEN4;
+	}
+	else if (strcmp(subClass, "GENERIC 5") == 0)
+	{
+		*wclass = WSC_GEN5;
+	}
+	else if (strcmp(subClass, "GENERIC 6") == 0)
+	{
+		*wclass = WSC_GEN6;
+	}
+	else if (strcmp(subClass, "GENERIC 7") == 0)
+	{
+		*wclass = WSC_GEN7;
+	}
+	else if (strcmp(subClass, "GENERIC 8") == 0)
+	{
+		*wclass = WSC_GEN8;
+	}
         else
         {
 	    ASSERT(!"Invalid weapon sub class", "Invalid weapon sub class: %s", subClass);

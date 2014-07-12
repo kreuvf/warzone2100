@@ -145,7 +145,7 @@ static bool loadProduction(const char *pData)
 {
 	PRODUCTION_FUNCTION	*psFunction;
 	char					functionName[MAX_STR_LENGTH], bodySize[MAX_STR_LENGTH];
-	UDWORD					productionOutput;
+	uint32_t					productionOutput;
 
 	psFunction = (PRODUCTION_FUNCTION *)malloc(sizeof(PRODUCTION_FUNCTION));
 	memset(psFunction, 0, sizeof(PRODUCTION_FUNCTION));
@@ -162,7 +162,7 @@ static bool loadProduction(const char *pData)
 	//read the data in
 	functionName[0] = '\0';
 	bodySize[0] = '\0';
-	sscanf(pData, "%255[^,'\r\n],%255[^,'\r\n],%d", functionName, bodySize,
+	sscanf(pData, "%255[^,'\r\n],%255[^,'\r\n],%u", functionName, bodySize,
 	       &productionOutput);
 
 	//allocate storage for the name
@@ -174,15 +174,14 @@ static bool loadProduction(const char *pData)
 		return false;
 	}
 
-	//check prod output < UWORD_MAX
-	if (productionOutput < UWORD_MAX)
+	//check prod output <= UINT32_MAX
+	if (productionOutput <= UINT32_MAX)
 	{
-		psFunction->productionOutput = (UWORD)productionOutput;
+		psFunction->productionOutput = (uint32_t)productionOutput;
 	}
 	else
 	{
-		ASSERT(false, "loadProduction: production Output too big for %s", psFunction->pName);
-
+		ASSERT(false, "loadProduction: production Output too big for %s, production Output set to 0", psFunction->pName);
 		psFunction->productionOutput = 0;
 	}
 
@@ -960,7 +959,7 @@ void structureProductionUpgrade(STRUCTURE *psBuilding)
 {
 	FACTORY						*pFact;
 	PRODUCTION_FUNCTION			*pFactFunc;
-	UDWORD						type, baseOutput, i;
+	uint32_t						type, baseOutput, i;
 	STRUCTURE_STATS             *psStat;
 
 	switch (psBuilding->pStructureType->type)
@@ -999,7 +998,7 @@ void structureProductionUpgrade(STRUCTURE *psBuilding)
 		}
 	}
 
-	pFact->productionOutput = (UBYTE)(baseOutput + (pFactFunc->productionOutput *
+	pFact->productionOutput = (uint32_t)(baseOutput + (pFactFunc->productionOutput *
 	        asProductionUpgrade[psBuilding->player][type].modifier) / 100);
 }
 
