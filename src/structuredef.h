@@ -222,6 +222,7 @@ struct REPAIR_FACILITY
 
 struct REARM_PAD
 {
+	UDWORD                          power;                  // Repair rate. Nothing to do with power.
 	UDWORD                          reArmPoints;            /* rearm points per cycle */
 	UDWORD                          timeStarted;            /* Time reArm started on current object */
 	BASE_OBJECT                     *psObj;                 /* Object being rearmed */
