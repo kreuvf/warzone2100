@@ -3412,6 +3412,9 @@ static void aiUpdateStructure(STRUCTURE *psStructure, bool isMission)
 		{
 			REARM_PAD	*psReArmPad = &psStructure->pFunctionality->rearmPad;
 			UDWORD pointsAlreadyAdded;
+			
+			//Tentatively hardcoded value
+			psReArmPad->power = 100;
 
 			psDroid = (DROID *)psChosenObj;
 			ASSERT_OR_RETURN( , psDroid != NULL, "invalid droid pointer");
@@ -3481,20 +3484,37 @@ static void aiUpdateStructure(STRUCTURE *psStructure, bool isMission)
 						}
 					}
 				}
+								
 				/* do repairing */
 				if (psDroid->body < psDroid->originalBody)
 				{
-					// Do not "simplify" this formula.
-					// It is written this way to prevent rounding errors.
-					pointsToAdd =  VTOL_REPAIR_FACTOR * (100+asReArmUpgrade[psStructure->player].modifier) * (gameTime -
-					               psReArmPad->timeStarted) / (GAME_TICKS_PER_SEC * 100);
-					pointsAlreadyAdded =  VTOL_REPAIR_FACTOR * (100+asReArmUpgrade[psStructure->player].modifier) * (psReArmPad->timeLastUpdated -
-					               psReArmPad->timeStarted) / (GAME_TICKS_PER_SEC * 100);
-
-					if ((pointsToAdd - pointsAlreadyAdded) > 0)
+				
+					//if in multiPlayer, and a Transporter - make sure its on the ground before repairing
+					if (bMultiPlayer && (psDroid->droidType == DROID_TRANSPORTER || psDroid->droidType == DROID_SUPERTRANSPORTER))
 					{
-						psDroid->body += (pointsToAdd - pointsAlreadyAdded);
+						if (!(psDroid->sMove.Status == MOVEINACTIVE &&
+							psDroid->sMove.iVertSpeed == 0))
+						{
+							objTrace(psStructure->id, "Waiting for transporter to land");
+							return;
+						}
 					}
+
+					//don't do anything if the resistance is low in multiplayer
+					if (bMultiPlayer)
+					{
+						if (psStructure->resistance < (SWORD)structureResistance(psStructure->
+							pStructureType, psStructure->player))
+						{
+							objTrace(psStructure->id, "Resistance too low for repair");
+							return;
+						}
+					}
+
+					// FIXME: duplicate code, make repairing cost power again
+					/* do repairing */
+					psDroid->body += gameTimeAdjustedAverage(psReArmPad->power);
+
 					if (psDroid->body >= psDroid->originalBody)
 					{
 						/* set droid points to max */
