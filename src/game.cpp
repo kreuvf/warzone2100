@@ -4904,6 +4904,7 @@ static bool loadSaveStructure2(const char *pFileName, STRUCTURE **ppList)
 			break;
 		case REF_REARM_PAD:
 			psReArmPad = ((REARM_PAD *)psStructure->pFunctionality);
+			psReArmPad->repairPoints = ini.value("Rearm/repairPoints", psReArmPad->repairPoints).toInt();
 			psReArmPad->reArmPoints = ini.value("Rearm/reArmPoints", psReArmPad->reArmPoints).toInt();
 			psReArmPad->timeStarted = ini.value("Rearm/timeStarted", psReArmPad->timeStarted).toInt();
 			psReArmPad->timeLastUpdated = ini.value("Rearm/timeLastUpdated", psReArmPad->timeLastUpdated).toInt();
@@ -5145,6 +5146,7 @@ bool writeStructFile(const char *pFileName)
 				else if (psCurr->pStructureType->type == REF_REARM_PAD)
 				{
 					REARM_PAD *psReArmPad = ((REARM_PAD *)psCurr->pFunctionality);
+					ini.setValue("Rearm/repairPoints", psReArmPad->repairPoints);
 					ini.setValue("Rearm/reArmPoints", psReArmPad->reArmPoints);
 					ini.setValue("Rearm/timeStarted", psReArmPad->timeStarted);
 					ini.setValue("Rearm/timeLastUpdated", psReArmPad->timeLastUpdated);
