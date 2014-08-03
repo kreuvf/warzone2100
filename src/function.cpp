@@ -294,7 +294,7 @@ static bool loadReArmFunction(const char *pData)
 
 	//read the data in
 	functionName[0] = '\0';
-	sscanf(pData, "%255[^,'\r\n],%d", functionName, &psFunction->reArmPoints);
+	sscanf(pData, "%255[^,'\r\n],%d,%d", functionName, &psFunction->reArmPoints, &psFunction->repairPoints);
 
 	//allocate storage for the name
 	storeName((FUNCTION *)psFunction, functionName);
