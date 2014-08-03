@@ -2051,8 +2051,8 @@ static bool setFunctionality(STRUCTURE	*psBuilding, STRUCTURE_TYPE functionType)
 		{
 			REARM_PAD* psReArmPad = &psBuilding->pFunctionality->rearmPad;
 
-			psReArmPad->reArmPoints = ((REARM_PAD *)psBuilding->pStructureType->asFuncList[0])->reArmPoints;
-
+			psReArmPad->reArmPoints = ((REARM_FUNCTION *)psBuilding->pStructureType->asFuncList[0])->reArmPoints;
+			psReArmPad->repairPoints = ((REARM_FUNCTION *)psBuilding->pStructureType->asFuncList[0])->repairPoints;
 			// Take advantage of upgrades
 			structureReArmUpgrade(psBuilding);
 			break;
@@ -3413,9 +3413,6 @@ static void aiUpdateStructure(STRUCTURE *psStructure, bool isMission)
 			REARM_PAD	*psReArmPad = &psStructure->pFunctionality->rearmPad;
 			UDWORD pointsAlreadyAdded;
 			
-			//Tentatively hardcoded value
-			psReArmPad->repairPoints = 100;
-
 			psDroid = (DROID *)psChosenObj;
 			ASSERT_OR_RETURN( , psDroid != NULL, "invalid droid pointer");
 			ASSERT_OR_RETURN( , isVtolDroid(psDroid), "invalid droid type");
