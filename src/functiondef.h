@@ -125,6 +125,7 @@ struct RESEARCH_FUNCTION : public FUNCTION
 /*To rearm VTOLs*/
 struct REARM_FUNCTION : public FUNCTION
 {
+	uint32_t		repairPoints;	/*The number of repair points added per cycle*/
 	UDWORD			reArmPoints;	/*The number of reArm points added per cycle*/
 };
 

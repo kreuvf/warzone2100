@@ -3414,7 +3414,7 @@ static void aiUpdateStructure(STRUCTURE *psStructure, bool isMission)
 			UDWORD pointsAlreadyAdded;
 			
 			//Tentatively hardcoded value
-			psReArmPad->power = 100;
+			psReArmPad->repairPoints = 100;
 
 			psDroid = (DROID *)psChosenObj;
 			ASSERT_OR_RETURN( , psDroid != NULL, "invalid droid pointer");
@@ -3513,7 +3513,7 @@ static void aiUpdateStructure(STRUCTURE *psStructure, bool isMission)
 
 					// FIXME: duplicate code, make repairing cost power again
 					/* do repairing */
-					psDroid->body += gameTimeAdjustedAverage(psReArmPad->power);
+					psDroid->body += gameTimeAdjustedAverage(psReArmPad->repairPoints);
 
 					if (psDroid->body >= psDroid->originalBody)
 					{
