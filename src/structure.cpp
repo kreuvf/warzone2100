@@ -3066,7 +3066,21 @@ static void aiUpdateStructure(STRUCTURE *psStructure, bool isMission)
 					{
 						psChosenObj = psDroid;
 					}
+					if (isVtolDroid(psDroid))
+					{
+						// for VTOLs just sitting on rearm pads, we repair them if they are damaged
+						// Check if the units is on the pad or not (within coordinates of center ± 64)
+						// Note: This is NOT the same as 'distance to center is <= 64'!
+						xdiff = abs((SDWORD)psDroid->pos.x - (SDWORD)psStructure->pos.x);
+						ydiff = abs((SDWORD)psDroid->pos.y - (SDWORD)psStructure->pos.y);
+						if (xdiff <= 64 && ydiff <= 64 && psDroid->body < psDroid->originalBody)
+						{
+							psChosenObj = psDroid;
+						}
+					}
 				}
+			
+				
 				if (!psChosenObj) // None available? Try allies.
 				{
 					for (i=0; i<MAX_PLAYERS; i++)
