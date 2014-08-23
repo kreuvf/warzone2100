@@ -938,6 +938,11 @@ void researchResult(UDWORD researchIndex, UBYTE player, bool bDisplay, STRUCTURE
 						// upgrade the repair points
 						structureRepairUpgrade(psCurr);
 					}
+					if (psCurr->pStructureType->type == REF_REARM_PAD)
+					{
+						// upgrade the repair points of a rearm pad
+						structureReArmRepairUpgrade(psCurr);
+					}
 				}
 				// and the mission structure
 				for (psCurr = mission.apsStructLists[player]; psCurr != NULL; psCurr = psCurr->psNext)
@@ -946,6 +951,11 @@ void researchResult(UDWORD researchIndex, UBYTE player, bool bDisplay, STRUCTURE
 					{
 						// upgrade the repair points
 						structureRepairUpgrade(psCurr);
+					}
+					if (psCurr->pStructureType->type == REF_REARM_PAD)
+					{
+						// upgrade the repair points of a rearm pad
+						structureReArmRepairUpgrade(psCurr);
 					}
 				}
 				break;

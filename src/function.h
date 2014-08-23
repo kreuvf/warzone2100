@@ -49,6 +49,7 @@ extern void structurePowerUpgrade(STRUCTURE *psBuilding);
 extern void structureRepairUpgrade(STRUCTURE *psBuilding);
 extern void structureSensorUpgrade(STRUCTURE *psBuilding);
 extern void structureReArmUpgrade(STRUCTURE *psBuilding);
+extern void structureReArmRepairUpgrade(STRUCTURE *psBuilding);
 extern void structureECMUpgrade(STRUCTURE *psBuilding);
 extern void sensorUpgrade(FUNCTION *pFunction, UBYTE player);
 extern void repairUpgrade(FUNCTION *pFunction, UBYTE player);

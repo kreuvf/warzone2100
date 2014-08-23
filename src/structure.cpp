@@ -2055,6 +2055,7 @@ static bool setFunctionality(STRUCTURE	*psBuilding, STRUCTURE_TYPE functionType)
 			psReArmPad->repairPoints = ((REARM_FUNCTION *)psBuilding->pStructureType->asFuncList[0])->repairPoints;
 			// Take advantage of upgrades
 			structureReArmUpgrade(psBuilding);
+			structureReArmRepairUpgrade(psBuilding);
 			break;
 		}
 

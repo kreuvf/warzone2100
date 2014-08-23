@@ -1046,6 +1046,22 @@ void structureReArmUpgrade(STRUCTURE *psBuilding)
 	        asReArmUpgrade[psBuilding->player].modifier) / 100;
 }
 
+void structureReArmRepairUpgrade(STRUCTURE *psBuilding)
+{
+	REARM_PAD					*pPad = &psBuilding->pFunctionality->rearmPad;
+	REPAIR_DROID_FUNCTION				*pRepairFunc;
+
+	//upgrade the repair points of a rearm pad
+	ASSERT(pPad != NULL, "structureReArmUpgrade: invalid ReArm pointer");
+
+	pRepairFunc = (REPAIR_DROID_FUNCTION *)psBuilding->pStructureType->asFuncList[0];
+	ASSERT(pRepairFunc != NULL,
+	       "structureRepairUpgrade: invalid Function pointer");
+	
+	pPad->repairPoints = pRepairFunc->repairPoints + (pRepairFunc->repairPoints *
+	        asRepairFacUpgrade[psBuilding->player].modifier) / 100;
+}
+
 void structurePowerUpgrade(STRUCTURE *psBuilding)
 {
 	POWER_GEN		*pPowerGen = &psBuilding->pFunctionality->powerGenerator;
