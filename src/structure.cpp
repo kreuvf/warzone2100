@@ -3074,7 +3074,7 @@ static void aiUpdateStructure(STRUCTURE *psStructure, bool isMission)
 						// Note: This is NOT the same as 'distance to center is <= 64'!
 						xdiff = abs((SDWORD)psDroid->pos.x - (SDWORD)psStructure->pos.x);
 						ydiff = abs((SDWORD)psDroid->pos.y - (SDWORD)psStructure->pos.y);
-						if (xdiff <= 64 && ydiff <= 64 && psDroid->body < psDroid->originalBody)
+						if (xdiff <= 64 && ydiff <= 64 && psDroid->pos.z == psStructure->pos.z && psDroid->body < psDroid->originalBody)
 						{
 							psChosenObj = psDroid;
 						}
