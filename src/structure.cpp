@@ -104,8 +104,6 @@
 
 //used to calculate the time required for rearming
 #define REARM_FACTOR                10
-//used to calculate the time  required for repairing
-#define VTOL_REPAIR_FACTOR          10
 
 //Value is stored for easy access to this structure stat
 UDWORD			factoryModuleStat;
