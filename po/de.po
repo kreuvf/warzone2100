@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: warzone2100\n"
 "Report-Msgid-Bugs-To: warzone2100-project@lists.sourceforge.net\n"
 "POT-Creation-Date: 2019-02-16 09:53+0000\n"
-"PO-Revision-Date: 2018-12-09 20:14+0100\n"
+"PO-Revision-Date: 2019-04-07 18:10+0200\n"
 "Last-Translator: Steven 'Kreuvf' Koenig <translations@kreuvf.de>\n"
 "Language-Team: Deutsch <warzone2100-project@lists.sourceforge.net>\n"
 "Language: de\n"
@@ -634,7 +634,7 @@ msgstr "Nehmen Sie die NASDA-Zentrale ein, bevor NEXUS oder das Kollektiv sie ve
 #: data/base/messages/strings/cam2strings.txt:116
 #: data/base/messages/strings/cam2strings.txt:121
 msgid "TRANSPORT MISSION: Satellite Uplink Site"
-msgstr "TRANSPORTERMISSION: "Satellitenverbindungszentrale"
+msgstr "TRANSPORTERMISSION: Satellitenkommunikationsstation"
 
 #: data/base/messages/strings/cam2strings.txt:112
 msgid "NEXUS is searching for still functioning memory banks."
@@ -677,7 +677,7 @@ msgstr "Fliegen Sie zur Landezone, rücken Sie dann vor, um die Boden-Luft-Stell
 #: data/base/messages/strings/cam2strings.txt:131
 #: data/base/messages/strings/cam2strings.txt:136
 msgid "TRANSPORT MISSION: Establish Safe Haven"
-msgstr "TRANSPORTERMISSION: "Sicheren Hafen einrichten"
+msgstr "TRANSPORTERMISSION: Sicheren Hafen einrichten"
 
 #: data/base/messages/strings/cam2strings.txt:132
 msgid "We can confirm a missile is heading for Alpha Base."
@@ -2402,8 +2402,6 @@ msgstr "Neue Konstruktionstechniken verbessern Turm"
 msgid "Replaces existing sensor tower"
 msgstr "Ersetzt bisherigen Sensorturm"
 
-# Da die Bezeichnung "spotter" für den verbesserten Sensorturm und nicht für eine Person steht ziehe ich
-# den Vorschlag "vorgeschobener Beobachter" zurück und bin dafür, die Übersetzung stehen zu lassen -alfred007
 #: data/base/messages/strings/resstrings.txt:462
 #: data/mp/messages/strings/resstrings.txt:224
 #: po/custom/fromJson.txt:856
@@ -2750,9 +2748,6 @@ msgstr "Verbesserung für Flak"
 msgid "High Explosive Flak shards"
 msgstr "Hochexplosive Flak-Splittermunition"
 
-# Basierend auf Deinem Kommentar, dass Flak wortgetreu entsprechend der
-# Abkürzung übersetzt werden soll habe ich die Flugabwehrgeschütze in
-# Flugabwehrkanonen umbenannt -alfred007
 #: data/base/messages/strings/resstrings.txt:671
 #: data/mp/messages/strings/resstrings.txt:318
 #: po/custom/fromJson.txt:724
@@ -4562,7 +4557,7 @@ msgstr "Tank-Killer-Supercyborg"
 #: data/mp/messages/strings/names.txt:788
 #: po/custom/fromJson.txt:1181
 msgid "Satellite Uplink Center"
-msgstr "Satellitenverbindungszentrale"
+msgstr "Satellitenkommunikationszentrum"
 
 #: data/mp/messages/strings/names.txt:799
 #: po/custom/fromJson.txt:1271
@@ -7743,9 +7738,6 @@ msgstr "Mörsernachladezeit -10%"
 msgid "Mortar Targeting Computer"
 msgstr "Mörser-Zielcomputer"
 
-# In data/base/messages/strings/resstrings.txt ist MRL eimal mit "Mini-Rocket Battery" und einmal
-# mit "Mini-Rocket Artillery" angegeben. Daher kann meiner Meinung nach trotz des Kommentars von Forgon
-# die Übersetzung so bleiben wie sie ist.
 #: po/custom/fromJson.txt:921
 msgid "MRL Emplacement"
 msgstr "Stellung mit Miniraketenartillerie"
@@ -8041,10 +8033,9 @@ msgstr "Veteran"
 msgid "NullBot"
 msgstr "NullBot"
 
-# Kleine grammatikalische Ergänzung ;) -alfred007
 #: po/custom/fromJson.txt:1010
 msgid "Objects become difficult to locate near it"
-msgstr "Objekte in seiner seiner Nähe werden schwer zu orten sein"
+msgstr "Objekte in seiner Nähe werden schwer zu orten sein"
 
 #: po/custom/fromJson.txt:1011
 msgid "Oil Derrick"
@@ -10139,8 +10130,6 @@ msgstr "Setze Zoom auf %.0f"
 msgid "Cannot Build. Oil Resource Burning."
 msgstr "Bau nicht möglich. Ölquelle brennt."
 
-# Ich habe im folgenden Hitpoints durchgehend mit Trefferpunkte übersetzt. Ist an einigen Stellen
-# auch von Dir so übersetzt worden und ergibt mehr Sinn in meinen Augen. -alfred007
 #: src/display.cpp:1535
 #, c-format
 msgid "%s - Hitpoints %d/%d - Experience %.1f, %s"
@@ -10558,7 +10547,7 @@ msgstr "Rechte Maustaste"
 
 #: src/frontend.cpp:1453
 msgid "Map/Radar Zoom"
-msgstr "(Mini)Kartenzoom"
+msgstr "Karten-/Minikartenzoom"
 
 #: src/frontend.cpp:1454
 msgid "Game Speed"
@@ -11729,10 +11718,9 @@ msgstr "Gewählte Einheit(en) vernichten"
 msgid "Toggle god Mode Status"
 msgstr "God-Mode-Status umschalten"
 
-# Sollte das nicht eher "Zeige Einstellungsbildschirm" heißen? -alfred007
 #: src/keymap.cpp:456
 msgid "Display Options Screen"
-msgstr "Zeige Darstellungsoptionen"
+msgstr "Zeige Einstellungsbildschirm"
 
 #: src/keymap.cpp:457
 msgid "Complete current research"
@@ -11997,7 +11985,7 @@ msgstr "VTOLs abgeschaltet."
 
 #: src/multiint.cpp:1665
 msgid "Satellite Uplink disabled."
-msgstr "Satellitenverbindungszentrale abgeschaltet."
+msgstr "Satellitenkommunikation abgeschaltet."
 
 #: src/multiint.cpp:1666
 msgid "Laser Satellite disabled."
